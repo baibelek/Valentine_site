@@ -21,6 +21,9 @@
     </style>
 </head>
 <body>
+    <audio id="bg-music" loop>
+        <source src="{{ url_for('static', filename='music/song.mp3') }}" type="audio/mpeg">
+    </audio>
     <div class="container">
         <h1>Ынакшаанар хуну биле! ❤️</h1>
         <div class="envelope-wrapper" onclick="openMessage()">
@@ -45,7 +48,12 @@
         function openMessage() {
             document.getElementById('secret-message').style.display = 'block';
             document.querySelector('.envelope-wrapper span').style.display = 'none';
+            var music = document.getElementById('bg-music');
+            music.play().catch(function(error) {
+                console.log("Автовоспроизведение заблокировано браузером, нужно взаимодействие пользователя.");
+            });
         }
+
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
