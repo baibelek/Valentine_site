@@ -3,68 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ынак эжимге♥️</title>
+    <title>С 8 Марта, Любимая!</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        body { margin: 0; background: #fff0f3; font-family: 'Montserrat', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; }
-        .heart { position: fixed; color: #ff4d6d; font-size: 20px; user-select: none; z-index: -1; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
-        .container { text-align: center; padding: 50px 20px; max-width: 800px; }
-        h1 { font-family: 'Caveat', cursive; font-size: 3.5rem; color: #c9184a; margin-bottom: 20px; }
-        .envelope-wrapper { background: #ffb3c1; padding: 25px; border-radius: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: 0.3s; display: inline-block; margin-bottom: 40px; }
-        .envelope-wrapper:hover { transform: scale(1.05); background: #ff8fa3; }
-        #secret-message { display: none; background: white; padding: 25px; border-radius: 15px; margin-top: 20px; border: 2px dashed #ff4d6d; font-size: 1.2rem; color: #590d22; line-height: 1.6; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; margin-top: 30px; }
-        .gallery img { width: 100%; height: 350px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: 0.4s; }
-        .gallery img:hover { transform: scale(1.02); }
-        .footer { margin: 50px 0; color: #ff4d6d; font-size: 0.9rem; }
+        :root {
+            --primary-color: #ff8fab;
+            --secondary-color: #fb6f92;
+            --bg-color: #fff5f8;
+            --text-color: #590d22;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            color: var(--text-color);
+        }
+
+        /* Анимация падающих цветов */
+        .flower {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            z-index: -1;
+            animation: fall linear forwards;
+            user-select: none;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(540deg); }
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(255,245,248,0.2), rgba(255,245,248,0.2)), 
+                        url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 5rem;
+            color: #c9184a;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            margin: 0;
+        }
+
+        .scroll-hint {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            animation: bounce 2s infinite;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Конверт с письмом */
+        .envelope-section {
+            margin: 100px 0;
+        }
+        .envelope {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 45px rgba(255,143,171,0.3);
+                        cursor: pointer;
+            transition: 0.5s;
+            display: inline-block;
+            border: 3px solid var(--primary-color);
+        }
+        .envelope:hover { transform: translateY(-10px); background: var(--primary-color); color: white; }
+        
+        #letter {
+            display: none;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            padding: 30px;
+            text-align: left;
+            background: #fff;
+            color: var(--text-color);
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Слайды/Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+        .photo-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s all ease-out;
+            background: white;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .photo-card.visible { opacity: 1; transform: translateY(0); }
+        
+        .photo-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .photo-card p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            margin: 15px 0 5px 0;
+            color: var(--secondary-color);
+        }
+
+        footer {
+            padding: 100px 0 50px;
+            font-family: 'Caveat';
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
     </style>
 </head>
 <body>
-    <audio id="bg-music" loop>
+
+    <audio id="music" loop>
         <source src="{{ url_for('static', filename='music/song.mp3') }}" type="audio/mpeg">
     </audio>
-    <div class="container">
-        <h1>Ынакшаанар хуну биле! ❤️</h1>
-        <div class="envelope-wrapper" onclick="openMessage()">
-            <span>Сенээ чагаажыгаш! Бээр базывыт 💌</span>
-            <div id="secret-message">
-                Эргим эжим, ынакшылым! <br><br>
-                Этот сайт — маленькая частичка моей любви к тебе. <br>
-                Ты делаешь меня самым счастливым человеком на свете. <br>
-                Пусть каждый наш день будет наполнен такой же радостью, как те моменты на фото ниже. <br><br>
-                <b>Чангыс сенээ ынак мен эжим♥️!</b>
+
+    <div class="hero">
+        <h1 class="animate__animated animate__fadeInDown">С 8 Марта, Моё Солнышко! 🌸</h1>
+        <div class="scroll-hint">Листай вниз, там сюрприз... ↓</div>
+    </div>
+
+    <div class="content">
+        <div class="envelope-section animate__animated animate__zoomIn">
+            <div class="envelope" onclick="openLetter()">
+                <span id="envelope-text">Тебе пришло весеннее письмо 💌 (Нажми)</span>
+                <div id="letter">
+                    Моя самая прекрасная и любимая! <br><br>
+                    Поздравляю тебя с этим чудесным праздником весны. <br>
+                    Ты — как первый весенний цветок, который дарит радость и тепло всему миру. <br>
+                    Пусть твоя улыбка сияет ярче солнца, а глаза всегда светятся от счастья. <br><br>
+                    <b>Ты моё главное вдохновение. Люблю тебя!</b>
+                </div>
             </div>
         </div>
-        <h2 style="color: #c9184a; font-family: 'Caveat'; font-size: 3rem;">Наши лучшие моменты</h2>
+
+        <h2 style="font-family: 'Caveat'; font-size: 4rem; color: #c9184a;">Наши весенние воспоминания</h2>
+        
         <div class="gallery">
             {% for photo in photos %}
-                <img src="{{ url_for('static', filename='images/' + photo) }}" alt="Мы вместе">
+            <div class="photo-card">
+                <img src="{{ url_for('static', filename='images/' + photo) }}" alt="Фото">
+                <p>Ты прекрасна... ✨</p>
+            </div>
             {% endfor %}
         </div>
+
+        <footer>Всегда твой, навсегда рядом ❤️</footer>
     </div>
-    <div class="footer">Ашаан кылган😂</div>
+
     <script>
-        function openMessage() {
-            document.getElementById('secret-message').style.display = 'block';
-            document.querySelector('.envelope-wrapper span').style.display = 'none';
-            var music = document.getElementById('bg-music');
-            music.play().catch(function(error) {
-                console.log("Автовоспроизведение заблокировано браузером, нужно взаимодействие пользователя.");
-            });
+        // Открытие письма и запуск музыки
+        function openLetter() {
+            document.getElementById('letter').style.display = 'block';
+            document.getElementById('envelope-text').style.display = 'none';
+            document.getElementById('music').play();
+            // Генерируем взрыв цветов при открытии
+            for(let i=0; i<20; i++) { setTimeout(createFlower, i*50); }
         }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
+        // Падающие цветы
+        const flowerIcons = ['🌸', '🌷', '🌹', '🌺', '🌼', '🌻'];
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.innerHTML = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = Math.random() * 3 + 4 + 's';
+            flower.style.opacity = Math.random() + 0.5;
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 6000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createFlower, 400);
+
+        // Появление фото при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.photo-card').forEach(card => {
+            observer.observe(card);
+        });
     </script>
 </body>
 </html>
